@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomePageTemp extends StatelessWidget {
+  final List<String> _stringList = ["one", "two", "three"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,20 +10,22 @@ class HomePageTemp extends StatelessWidget {
         title: Text("Temporal Home Page"),
       ),
       body: ListView(
-        children: <Widget>[
-          ListTile(
-            title: Text("ListTile Title"),
-          ),
-          Divider(),
-          ListTile(
-            title: Text("ListTile Title"),
-          ),
-          Divider(),
-          ListTile(
-            title: Text("ListTile Title"),
-          ),
-        ],
+        children: _createWidgetItems(),
       ),
     );
+  }
+
+  List<Widget> _createWidgetItems() {
+    List<Widget> widgetList = List<Widget>();
+
+    for (String item in _stringList) {
+      widgetList..add(
+        ListTile(
+          title: Text(item),
+        ),
+      )..add(Divider());
+    }
+
+    return widgetList;
   }
 }
