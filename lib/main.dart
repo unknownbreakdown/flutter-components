@@ -9,12 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Components App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Components'),
-        ),
-        body: HomePageTemp(),
-      ),
+      home: HomePageTemp(),
     );
   }
 }
