@@ -8,29 +8,41 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Components"),
       ),
-      body: _list(),
+      body: _buildList(),
     );
   }
 
-  Widget _list() {
-    print(menuProvider.options);
-
-    return ListView(
-      children: _listItems(),
+  Widget _buildList() {
+    return FutureBuilder(
+      future: menuProvider.loadData(),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+        return ListView(
+          children: _buildListItems(snapshot.data),
+        );
+      },
     );
   }
 
-  List<Widget> _listItems() {
-    return [
-      ListTile(
-        title: Text("Sample Title"),
-      ),
-      ListTile(
-        title: Text("Sample Title"),
-      ),
-      ListTile(
-        title: Text("Sample Title"),
-      ),
-    ];
+  List<Widget> _buildListItems(List<dynamic> data) {
+    List<Widget> widgetList = [];
+
+    data.forEach((item) {
+      Widget tempWidget = ListTile(
+        title: Text(item['texto']),
+        leading: Icon(
+          Icons.account_circle,
+          color: Colors.blue,
+        ),
+        trailing: Icon(
+          Icons.keyboard_arrow_right,
+          color: Colors.blue,
+        ),
+        onTap: () {},
+      );
+      widgetList..add(tempWidget)..add(Divider());
+    });
+
+    return widgetList;
   }
 }
