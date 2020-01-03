@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_components/src/pages/alert.dart';
 import 'package:flutter_components/src/pages/avatar.dart';
+import 'package:flutter_components/src/pages/card.dart';
 import 'package:flutter_components/src/pages/home.dart';
  
 void main() => runApp(MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         '/': (BuildContext context) => HomePage(),
         'alert': (BuildContext context) => AlertPage(),
         'avatar': (BuildContext context) => AvatarPage(),
+        'card' : (BuildContext context) => CardPage(),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("Route named ${settings.name}");
