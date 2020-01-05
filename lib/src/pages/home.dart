@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_components/src/pages/alert.dart';
 import 'package:flutter_components/src/providers/menu_provider.dart';
 import 'package:flutter_components/src/utils/icon_from_string.dart';
 
