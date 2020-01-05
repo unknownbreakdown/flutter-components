@@ -20,6 +20,11 @@
             "ruta" : "animated_container",
             "icon" : "donut_large",
             "texto": "Animated Container"
+        },
+        {
+            "ruta" : "input",
+            "icon" : "input",
+            "texto": "Inputs"
         }
     ]
 }

@@ -4,6 +4,7 @@ import 'package:flutter_components/src/pages/animated_container.dart';
 import 'package:flutter_components/src/pages/avatar.dart';
 import 'package:flutter_components/src/pages/card.dart';
 import 'package:flutter_components/src/pages/home.dart';
+import 'package:flutter_components/src/pages/input.dart';
  
 void main() => runApp(MyApp());
  
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         'avatar': (BuildContext context) => AvatarPage(),
         'card' : (BuildContext context) => CardPage(),
         'animated_container' : (BuildContext context) => AnimatedContainerPage(),
+        'input' : (BuildContext context) => InputPage(),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("Route named ${settings.name}");
