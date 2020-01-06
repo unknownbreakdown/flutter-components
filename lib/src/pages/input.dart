@@ -7,6 +7,8 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String _name = "";
+  String _email = "";
+  String _password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +19,18 @@ class _InputPageState extends State<InputPage> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
-          _buildInput(),
+          _buildTextInput(),
           Divider(),
-          _buildPerson(),
+          _buildEmailInput(),
+          Divider(),
+          _buildPasswordInput(),
+          _buildPersonData(),
         ],
       ),
     );
   }
 
-  Widget _buildInput() {
+  Widget _buildTextInput() {
     return TextField(
       autofocus: true,
       textCapitalization: TextCapitalization.words,
@@ -44,9 +49,45 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  Widget _buildPerson() {
+  _buildEmailInput() {
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+          hintText: "Enter your email",
+          labelText: "Email",
+          helperText: "Enter a valid email",
+          prefixIcon: Icon(Icons.alternate_email),
+          counter: Text("${_name.length} letters")),
+      onChanged: (value) {
+        _email = value;
+        setState(() {});
+        print(_email);
+      },
+    );
+  }
+
+  _buildPasswordInput() {
+    return TextField(
+      obscureText: true,
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+          hintText: "Enter your password",
+          labelText: "Password",
+          helperText: "Enter letters, digits and symbols",
+          prefixIcon: Icon(Icons.lock),
+          counter: Text("${_name.length} letters")),
+      onChanged: (value) {
+        _password = value;
+        print(_password);
+      },
+    );
+  }
+
+  Widget _buildPersonData() {
     return ListTile(
-      title: Text("Person's name: $_name"),
+      title: Text("Name: $_name"),
+      subtitle: Text("Email: $_email"),
     );
   }
 }
