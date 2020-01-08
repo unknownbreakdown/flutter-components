@@ -5,30 +5,38 @@ import 'package:flutter_components/src/pages/avatar.dart';
 import 'package:flutter_components/src/pages/card.dart';
 import 'package:flutter_components/src/pages/home.dart';
 import 'package:flutter_components/src/pages/input.dart';
- 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 void main() => runApp(MyApp());
- 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en'), // English
+        const Locale('es'), // Spanish
+      ],
       title: 'Flutter Components App',
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) => HomePage(),
         'alert': (BuildContext context) => AlertPage(),
         'avatar': (BuildContext context) => AvatarPage(),
-        'card' : (BuildContext context) => CardPage(),
-        'animated_container' : (BuildContext context) => AnimatedContainerPage(),
-        'input' : (BuildContext context) => InputPage(),
+        'card': (BuildContext context) => CardPage(),
+        'animated_container': (BuildContext context) => AnimatedContainerPage(),
+        'input': (BuildContext context) => InputPage(),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("Route named ${settings.name}");
 
         return MaterialPageRoute(
-          builder: (BuildContext context) => AlertPage()
-        );
+            builder: (BuildContext context) => AlertPage());
       },
     );
   }
