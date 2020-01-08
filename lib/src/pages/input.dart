@@ -9,6 +9,7 @@ class _InputPageState extends State<InputPage> {
   String _name = "";
   String _email = "";
   String _password = "";
+  TextEditingController _dateInputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,9 @@ class _InputPageState extends State<InputPage> {
           _buildEmailInput(),
           Divider(),
           _buildPasswordInput(),
+          Divider(),
+          _buildDateInput(context),
+          Divider(),
           _buildPersonData(),
         ],
       ),
@@ -84,10 +88,43 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+  Widget _buildDateInput(BuildContext contex) {
+    return TextField(
+        enableInteractiveSelection: false,
+        controller: _dateInputController,
+        decoration: InputDecoration(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+            hintText: "Enter your birth date",
+            labelText: "Birth date",
+            helperText: "...",
+            prefixIcon: Icon(Icons.calendar_today),
+            counter: Text("${_name.length} letters")),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDate(context);
+        });
+  }
+
+  void _selectDate(BuildContext context) async {
+    DateTime pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2017),
+      lastDate: DateTime(2023),
+    );
+
+    if (pickedDate != null) {
+      _dateInputController.text = pickedDate.toString();
+    }
+  }
+
   Widget _buildPersonData() {
     return ListTile(
       title: Text("Name: $_name"),
       subtitle: Text("Email: $_email"),
     );
   }
+
+  
 }
