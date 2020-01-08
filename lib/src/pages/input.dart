@@ -10,6 +10,9 @@ class _InputPageState extends State<InputPage> {
   String _email = "";
   String _password = "";
   TextEditingController _dateInputController = TextEditingController();
+  List<String> _dropdownOptions = ['Fly', 'Swim', 'Run'];
+  String _selectedDropdownOption = 'Fly';
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,8 @@ class _InputPageState extends State<InputPage> {
           _buildPasswordInput(),
           Divider(),
           _buildDateInput(context),
+          Divider(),
+          _buildDropdownInput(),
           Divider(),
           _buildPersonData(),
         ],
@@ -119,12 +124,35 @@ class _InputPageState extends State<InputPage> {
     }
   }
 
+  List<DropdownMenuItem<String>>_buidlDropdownItems () {
+    List<DropdownMenuItem<String>> dropdownList = List();
+
+    _dropdownOptions.forEach((power) {
+      dropdownList.add(DropdownMenuItem(
+        child: Text(power),
+        value: power,
+      ));
+    });
+
+    return dropdownList;
+  }
+
+  _buildDropdownInput() {
+    return DropdownButton(
+      value: _selectedDropdownOption,
+      items: _buidlDropdownItems(),
+      onChanged: (option) {
+        setState(() {
+          _selectedDropdownOption = option;       
+                });
+      },
+    );
+  }
+
   Widget _buildPersonData() {
     return ListTile(
       title: Text("Name: $_name"),
       subtitle: Text("Email: $_email"),
     );
   }
-
-  
 }
