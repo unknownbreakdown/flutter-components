@@ -48,18 +48,22 @@ class _ListPageState extends State<ListPage> {
   }
 
   _buildList() {
-    return ListView.builder(
-      controller: _scrollController,
-      itemCount: _numbers.length,
-      itemBuilder: (BuildContext context, int index) {
-        int imageNumber = _numbers[index];
+    return RefreshIndicator(
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: _numbers.length,
+        itemBuilder: (BuildContext context, int index) {
+          int imageNumber = _numbers[index];
 
-        return FadeInImage(
-          placeholder: AssetImage('images/loading.gif'),
-          image: NetworkImage('https://picsum.photos/id/$imageNumber/500/300'),
-          height: 220.0,
-        );
-      },
+          return FadeInImage(
+            placeholder: AssetImage('images/loading.gif'),
+            image:
+                NetworkImage('https://picsum.photos/id/$imageNumber/500/300'),
+            height: 220.0,
+          );
+        },
+      ),
+      onRefresh: _fetchImagesOnPull,
     );
   }
 
@@ -83,11 +87,8 @@ class _ListPageState extends State<ListPage> {
   void _httpResponse() {
     _isLoading = false;
     _addItems();
-    _scrollController.animateTo(
-      _scrollController.position.pixels + 30,
-      curve: Curves.fastOutSlowIn,
-      duration: Duration(milliseconds: 300)
-    );
+    _scrollController.animateTo(_scrollController.position.pixels + 30,
+        curve: Curves.fastOutSlowIn, duration: Duration(milliseconds: 300));
   }
 
   Widget _buildLoading() {
@@ -98,5 +99,16 @@ class _ListPageState extends State<ListPage> {
     } else {
       return Container();
     }
+  }
+
+  Future<Null> _fetchImagesOnPull() async {
+    Duration duration = Duration(seconds: 3);
+    new Timer(duration, () {
+      _numbers.clear();
+      _lastItem = 0;
+      _fetchData();
+    });
+
+    return Future.delayed(duration);
   }
 }
