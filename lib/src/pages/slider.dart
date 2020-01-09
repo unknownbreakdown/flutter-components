@@ -7,6 +7,7 @@ class SliderPage extends StatefulWidget {
 
 class _SliderPageState extends State<SliderPage> {
   double _sliderValue = 100.0;
+  bool _blockSlider = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class _SliderPageState extends State<SliderPage> {
         child: Column(
           children: <Widget>[
             _buildSlider(),
+            _buildCheckbox(),
             Expanded(
               child: _buildImage(),
             ),
@@ -36,8 +38,38 @@ class _SliderPageState extends State<SliderPage> {
       value: _sliderValue,
       min: 10.0,
       max: 300.0,
+      onChanged: (_blockSlider)
+          ? null
+          : (value) {
+              _sliderValue = value;
+              setState(() {});
+            },
+    );
+  }
+
+  Widget _buildCheckbox() {
+    // return Checkbox(
+    //   value: _blockSlider,
+    //   onChanged: (value) {
+    //     _blockSlider = value;
+    //     setState(() {});
+    //   },
+    // );
+
+    // return CheckboxListTile(
+    //   title: Text("Block slider"),
+    //   value: _blockSlider,
+    //   onChanged: (value) {
+    //     _blockSlider = value;
+    //     setState(() {});
+    //   },
+    // );
+
+    return SwitchListTile(
+      title: Text("Block slider"),
+      value: _blockSlider,
       onChanged: (value) {
-        _sliderValue = value;
+        _blockSlider = value;
         setState(() {});
       },
     );
@@ -45,7 +77,8 @@ class _SliderPageState extends State<SliderPage> {
 
   Widget _buildImage() {
     return Image(
-      image: NetworkImage('https://cdn.cinemascomics.com/wp-content/uploads/2017/04/Eva-Green-como-Catwoman.jpg'),
+      image: NetworkImage(
+          'https://cdn.cinemascomics.com/wp-content/uploads/2017/04/Eva-Green-como-Catwoman.jpg'),
       width: _sliderValue,
       fit: BoxFit.contain,
     );
