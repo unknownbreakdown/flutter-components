@@ -6,7 +6,21 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  List<int> _numbers = [1,2,3,4,5,6];
+  List<int> _numbers = List();
+  int _lastItem = 0;
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _addItems();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+        _addItems();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +34,7 @@ class _ListPageState extends State<ListPage> {
 
   _buildList() {
     return ListView.builder(
+      controller: _scrollController,
       itemCount: _numbers.length,
       itemBuilder: (BuildContext context, int index) {
         int imageNumber = _numbers[index];
@@ -30,5 +45,14 @@ class _ListPageState extends State<ListPage> {
         );
       },
     );
+  }
+
+  void _addItems() {
+    for (var i = 0; i < 10; i++) {
+      _lastItem++;
+      _numbers.add(_lastItem);
+    }
+
+    setState(() {});
   }
 }
