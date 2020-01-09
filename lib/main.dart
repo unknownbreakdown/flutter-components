@@ -5,6 +5,7 @@ import 'package:flutter_components/src/pages/avatar.dart';
 import 'package:flutter_components/src/pages/card.dart';
 import 'package:flutter_components/src/pages/home.dart';
 import 'package:flutter_components/src/pages/input.dart';
+import 'package:flutter_components/src/pages/slider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         'card': (BuildContext context) => CardPage(),
         'animated_container': (BuildContext context) => AnimatedContainerPage(),
         'input': (BuildContext context) => InputPage(),
+        'slider': (BuildContext context) => SliderPage(),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("Route named ${settings.name}");
